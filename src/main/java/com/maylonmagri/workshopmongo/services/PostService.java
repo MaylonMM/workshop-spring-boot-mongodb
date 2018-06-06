@@ -1,5 +1,6 @@
 package com.maylonmagri.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,11 @@ public class PostService {
 	}
 	
 	public List<Post> findByTitle(String text) {
-		return repo.seachTitle(text);
+		return repo.searchTitle(text);
+	}
+	
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+		maxDate = new Date(maxDate.getTime() + 23 * 60 * 60 * 1000 + 59 * 60 * 1000 + 59 * 1000 + 999);
+		return repo.fullSearch(text, minDate, maxDate);
 	}
 }
